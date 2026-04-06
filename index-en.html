@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Detailing</title>
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1f3f63">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./scripts.js" type="module" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="nav" role="navigation" aria-label="Main menu">
+      <a class="brand" href="#" aria-label="Clean Zone">
+        <img class="brand-logo" src="./img/logo.png" alt="Clean Zone">
+      </a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#prices">Prices</a>
+      <a class="nav-link" href="#contact">Contact</a>
+      <div class="nav-item">
+        <button type="button" class="nav-btn" aria-haspopup="true" aria-expanded="false">
+          Areas
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown" role="region" aria-label="Service areas">
+          Area 1<br>
+          Area 2<br>
+          Area 3<br>
+          Area 4<br>
+          Area 5<br>
+          Area 6<br>
+          Area 7
+        </div>
+      </div>
+      <a class="nav-link lang-switch nav-spacer" href="./index.HTML" aria-label="Switch to Russian">
+        <i class="fa-solid fa-globe"></i>
+        RU
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1>Premium detailing services</h1>
+      <p>
+        We do more than wash cars - we restore, protect, and elevate their appearance.
+        Every vehicle gets maximum attention to detail and careful professional work.
+      </p>
+    </div>
+  </section>
+
+  <section id="about" class="section section-alt">
+    <div class="container">
+      <h2>About us</h2>
+      <p class="lead">
+        Your car is more than transportation - it reflects you.
+        We make sure it always looks perfect.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <h3><i class="fa-solid fa-shield-heart"></i> What makes us better</h3>
+          <p>
+            • Safe hand wash without scratches<br>
+            • Deep wheel and tire cleaning<br>
+            • Careful streak-free drying<br>
+            • Minor scratch removal included<br>
+            • Thorough attention to every detail
+          </p>
+        </div>
+        <div class="feature">
+          <h3><i class="fa-solid fa-magnifying-glass"></i> Attention to detail</h3>
+          <p>We do not rush - we focus on results. Every detail matters, and you can see it.</p>
+        </div>
+        <div class="feature">
+          <h3><i class="fa-solid fa-gem"></i> Our principle</h3>
+          <p>
+            Not just clean - perfect.<br>
+            Not just shine - long-term protection.
+          </p>
+        </div>
+        <div class="feature">
+          <h3><i class="fa-solid fa-screwdriver-wrench"></i> Professional materials</h3>
+          <p>We use quality products and tools to safely deliver premium-level results.</p>
+        </div>
+        <div class="feature">
+          <h3><i class="fa-solid fa-camera-retro"></i> Before/after quality proof</h3>
+          <p>
+            We provide before and after photos for each car, so you can clearly see the value of every service.
+            It is a transparent process built on trust, not just promises.
+          </p>
+        </div>
+        <div class="feature">
+          <h3><i class="fa-solid fa-tag"></i> Fair pricing</h3>
+          <p>No hidden fees - we clearly explain what is included and what affects the final cost.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices" class="section">
+    <div class="container prices-head">
+      <h2>Prices</h2>
+      <p class="lead">
+        Final cost depends on vehicle class and condition. Below are services and estimated prices.
+      </p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3><i class="fa-solid fa-couch"></i> Interior detailing</h3>
+        <ul class="card-list">
+          <li>Deep cleaning of seats and carpets</li>
+          <li>Cleaning hard-to-reach areas</li>
+          <li>Care for leather, plastic, and delicate surfaces</li>
+          <li>Removal of stains, odors, and embedded dirt</li>
+          <li>Detailed work on seams, vents, and small elements</li>
+        </ul>
+        <div class="price">from $150</div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-car"></i> Exterior detailing</h3>
+        <ul class="card-list">
+          <li>Safe hand wash without scratches</li>
+          <li>Deep wheel and tire cleaning</li>
+          <li>Careful streak-free drying</li>
+          <li>Minor scratch removal included</li>
+          <li>Thorough attention to every detail</li>
+        </ul>
+        <div class="price">from $60</div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-layer-group"></i> Full detailing (interior + exterior)</h3>
+        <ul class="card-list">
+          <li>Full interior cleaning</li>
+          <li>Exterior detailing</li>
+          <li>Wheel and tire cleaning</li>
+          <li>Interior surface care</li>
+          <li>Engine wash (basic)</li>
+        </ul>
+        <div class="price-sub">Sedan: $180 - $220</div>
+        <div class="price-sub">SUV (5 seats): $200 - $250</div>
+        <div class="price-sub">Van (7 seats): $200 - $280</div>
+        <div class="price-sub">Pickup (2 doors): $210 - $250</div>
+        <div class="price-sub">Pickup (4 doors): $230 - $280</div>
+        <div class="price-sub">Truck: $300 - $400</div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-engine"></i> Engine wash</h3>
+        <ul class="card-list">
+          <li>Cleaner visual appearance</li>
+          <li>Easier to spot leaks and issues</li>
+          <li>Helps maintain engine condition</li>
+        </ul>
+        <div class="price">Basic - included</div>
+        <div class="price-sub">Deep cleaning: +$30 - $60</div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-gem"></i> Ceramic coating (body)</h3>
+        <ul class="card-list">
+          <li>Deep mirror-like shine</li>
+          <li>Protection from sun, dirt, and chemicals</li>
+          <li>Water-repellent effect</li>
+          <li>Easier maintenance and washing</li>
+          <li>Less fading and minor damage</li>
+        </ul>
+        <div class="price-sub">Sedan: $500 - $650</div>
+        <div class="price-sub">SUV: $600 - $650</div>
+        <div class="price-sub">Large pickup: $700 - $750</div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-hand-sparkles"></i> Ceramic coating (leather interior)</h3>
+        <ul class="card-list">
+          <li>Protection from stains and liquids</li>
+          <li>Helps prevent cracking and fading</li>
+          <li>Keeps softness and appearance</li>
+          <li>Makes maintenance easier</li>
+        </ul>
+        <div class="price">Full leather interior: $300-$600</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="cta">
+    <div class="cta-inner">
+      <h2>Book now</h2>
+      <p>Your car deserves more than a regular wash. Spots are limited - contact us today.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="tel:+1234567890">+1 (234) 567-890</a>
+        <a class="contact-link social-link" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
