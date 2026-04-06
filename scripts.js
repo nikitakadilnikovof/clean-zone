@@ -65,6 +65,59 @@ document.addEventListener('DOMContentLoaded', () => {
   const TELEGRAM_CHAT_ID = '-5249471437';
   const REQUESTS_STORAGE_KEY = 'clean_zone_requests';
 
+  const pageLang = (document.documentElement.getAttribute('lang') || 'ru').slice(0, 2);
+  const FORM_I18N = {
+    ru: {
+      extraService: 'Доп услуга',
+      fillFields: 'Заполните все поля формы.',
+      businessHours: 'Выберите время с 06:00 до 21:00.',
+      futureTime: 'Выберите работающее время: с 06:00 до 21:00 и не раньше текущего момента.',
+      sending: 'Отправляем заявку...',
+      sentOk: 'Заявка отправлена в Telegram.',
+      sentFail: 'Не удалось отправить в Telegram. Данные сохранены локально для теста.',
+      tgTitle: 'Новая заявка с сайта Clean Zone',
+      tgPhone: 'Телефон',
+      tgDate: 'Дата',
+      tgTime: 'Время',
+      tgService: 'Услуга',
+      tgExtras: 'Доп. услуги',
+      tgExtrasNone: 'нет'
+    },
+    en: {
+      extraService: 'Add-on service',
+      fillFields: 'Please fill in all fields.',
+      businessHours: 'Choose a time between 6:00 AM and 9:00 PM.',
+      futureTime: 'Choose a future appointment within business hours (6:00 AM – 9:00 PM).',
+      sending: 'Sending your request...',
+      sentOk: 'Request sent to Telegram.',
+      sentFail: 'Could not send to Telegram. Data saved locally for testing.',
+      tgTitle: 'New request from Clean Zone website',
+      tgPhone: 'Phone',
+      tgDate: 'Date',
+      tgTime: 'Time',
+      tgService: 'Service',
+      tgExtras: 'Add-on services',
+      tgExtrasNone: 'none'
+    },
+    es: {
+      extraService: 'Servicio adicional',
+      fillFields: 'Complete todos los campos.',
+      businessHours: 'Elija una hora entre las 6:00 y las 21:00.',
+      futureTime: 'Elija fecha y hora futuras dentro del horario (6:00 – 21:00).',
+      sending: 'Enviando solicitud...',
+      sentOk: 'Solicitud enviada a Telegram.',
+      sentFail: 'No se pudo enviar a Telegram. Los datos se guardaron localmente para pruebas.',
+      tgTitle: 'Nueva solicitud desde el sitio Clean Zone',
+      tgPhone: 'Teléfono',
+      tgDate: 'Fecha',
+      tgTime: 'Hora',
+      tgService: 'Servicio',
+      tgExtras: 'Servicios adicionales',
+      tgExtrasNone: 'ninguno'
+    }
+  };
+  const tf = (key) => FORM_I18N[pageLang]?.[key] ?? FORM_I18N.ru[key];
+
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     const dateInput = contactForm.querySelector('input[name="date"]');
@@ -172,11 +225,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
+    const enforceTimeInWindow = () => {
+      if (!timeInput?.value) return;
+      const lo = timeStrToMinutes(timeInput.min || BUSINESS_START);
+      const hi = timeStrToMinutes(timeInput.max || BUSINESS_END);
+      let m = timeStrToMinutes(timeInput.value);
+      if (Number.isNaN(m)) return;
+      if (m < lo) m = lo;
+      if (m > hi) m = hi;
+      timeInput.value = `${pad2(Math.floor(m / 60))}:${pad2(m % 60)}`;
+    };
+
+    const onTimeFieldUpdate = () => {
+      syncDateTimeConstraints();
+      enforceTimeInWindow();
+    };
+
     syncDateTimeConstraints();
+    enforceTimeInWindow();
     dateInput?.addEventListener('change', syncDateTimeConstraints);
     dateInput?.addEventListener('input', syncDateTimeConstraints);
-    timeInput?.addEventListener('focus', syncDateTimeConstraints);
-    timeInput?.addEventListener('change', syncDateTimeConstraints);
+    timeInput?.addEventListener('focus', onTimeFieldUpdate);
+    timeInput?.addEventListener('change', onTimeFieldUpdate);
+    timeInput?.addEventListener('input', onTimeFieldUpdate);
+    timeInput?.addEventListener('blur', enforceTimeInWindow);
 
     const allServiceOptions = Array.from(serviceSelect?.options ?? [])
       .filter((opt) => opt.value)
@@ -241,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const label = document.createElement('label');
       label.className = 'form-field';
       const title = document.createElement('span');
-      title.textContent = 'Доп услуга';
+      title.textContent = tf('extraService');
       const select = document.createElement('select');
       select.name = 'extraService[]';
 
@@ -268,11 +340,12 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       syncDateTimeConstraints();
+      enforceTimeInWindow();
       const formData = new FormData(contactForm);
 
       const phone = String(formData.get('phone') ?? '').trim();
       const date = String(formData.get('date') ?? '').trim();
-      const time = String(formData.get('time') ?? '').trim();
+      const time = String(timeInput?.value ?? formData.get('time') ?? '').trim();
       const service = String(formData.get('service') ?? '').trim();
       const serviceLabel = contactForm.querySelector('select[name="service"] option:checked')?.textContent?.trim() || service;
       const extraServices = getAdditionalSelects()
@@ -281,18 +354,18 @@ document.addEventListener('DOMContentLoaded', () => {
         .map((opt) => ({ value: opt.value, label: opt.textContent?.trim() || opt.value }));
 
       if (!phone || !date || !time || !service) {
-        setStatus('Заполните все поля формы.', true);
+        setStatus(tf('fillFields'), true);
         return;
       }
 
       if (!isTimeInBusinessHours(time)) {
-        setStatus('Выберите время с 06:00 до 21:00.', true);
+        setStatus(tf('businessHours'), true);
         return;
       }
 
       const selectedDateTime = new Date(`${date}T${time}`);
       if (Number.isNaN(selectedDateTime.getTime()) || selectedDateTime <= new Date()) {
-        setStatus('Выберите дату и время в будущем (в пределах рабочих часов).', true);
+        setStatus(tf('futureTime'), true);
         return;
       }
 
@@ -309,16 +382,19 @@ document.addEventListener('DOMContentLoaded', () => {
       saveRequestLocally(requestPayload);
 
       if (submitButton) submitButton.disabled = true;
-      setStatus('Отправляем заявку...');
+      setStatus(tf('sending'));
 
       try {
+        const extrasLine = extraServices.length
+          ? extraServices.map((item) => item.label).join(', ')
+          : tf('tgExtrasNone');
         const message = [
-          'Новая заявка с сайта Clean Zone',
-          `Телефон: ${phone}`,
-          `Дата: ${date}`,
-          `Время: ${time}`,
-          `Услуга: ${serviceLabel}`,
-          `Доп. услуги: ${extraServices.length ? extraServices.map((item) => item.label).join(', ') : 'нет'}`
+          tf('tgTitle'),
+          `${tf('tgPhone')}: ${phone}`,
+          `${tf('tgDate')}: ${date}`,
+          `${tf('tgTime')}: ${time}`,
+          `${tf('tgService')}: ${serviceLabel}`,
+          `${tf('tgExtras')}: ${extrasLine}`
         ].join('\n');
 
         const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -336,14 +412,14 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error(`Telegram API error: ${response.status}`);
         }
 
-        setStatus('Заявка отправлена в Telegram.');
+        setStatus(tf('sentOk'));
         contactForm.reset();
         if (extraServicesEl) extraServicesEl.innerHTML = '';
         syncDateTimeConstraints();
         refreshAddServiceButton();
       } catch (error) {
         console.error(error);
-        setStatus('Не удалось отправить в Telegram. Данные сохранены локально для теста.', true);
+        setStatus(tf('sentFail'), true);
       } finally {
         if (submitButton) submitButton.disabled = false;
       }

@@ -56,10 +56,12 @@
           </ul>
         </div>
       </div>
-      <a class="nav-link lang-switch nav-spacer" href="./index-en.html" aria-label="Switch to English">
-        <i class="fa-solid fa-globe"></i>
-        EN
-      </a>
+      <div class="lang-switch-group nav-spacer" role="group" aria-label="Язык сайта">
+        <i class="fa-solid fa-globe lang-globe" aria-hidden="true"></i>
+        <a class="nav-link lang-switch" href="./index-en.html" lang="en">EN</a>
+        <span class="lang-sep" aria-hidden="true">–</span>
+        <a class="nav-link lang-switch" href="./index-es.html" lang="es">ES</a>
+      </div>
     </div>
   </header>
 
@@ -283,7 +285,7 @@
             <input type="time" name="time" min="06:00" max="21:00" required>
           </label>
         </div>
-        <p class="form-hint">Доступна запись на сегодня и следующие дни. Время визита — с 06:00 до 21:00.</p>
+        <p class="form-hint">Запись на сегодня и на будущие дни. Доступно только время с 06:00 до 21:00; интервал с 21:00 до 06:00 выбрать нельзя.</p>
         <div class="service-group">
           <label class="form-field service-main-field">
             <span>Услуга</span>
