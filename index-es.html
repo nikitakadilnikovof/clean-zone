@@ -16,52 +16,59 @@
       <a class="brand" href="#" aria-label="Clean Zone">
         <img class="brand-logo" src="./img/logo.png" alt="Clean Zone">
       </a>
-      <a class="nav-link" href="#about">Nosotros</a>
-      <a class="nav-link" href="#prices">Servicios</a>
-      <a class="nav-link" href="#works">Trabajos</a>
-      <a class="nav-link" href="#contact">Reservar</a>
-      <div class="nav-item">
-        <button type="button" class="nav-btn" aria-haspopup="true" aria-expanded="false">
-          Zonas
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div class="dropdown" role="region" aria-label="Zonas de servicio">
-          <p class="dropdown-title">Zonas que atendemos</p>
-          <p class="dropdown-note">Jacksonville, FL y alrededores — servicio a domicilio</p>
-          <ul class="dropdown-list">
-            <li>Ponte Vedra Beach</li>
-            <li>Nocatee</li>
-            <li>Jacksonville Beach</li>
-            <li>Neptune Beach</li>
-            <li>Atlantic Beach</li>
-            <li>Mandarin</li>
-            <li>San Marco</li>
-            <li>Baymeadows</li>
-            <li>Southside</li>
-            <li>Arlington</li>
-            <li>Riverside</li>
-            <li>Avondale</li>
-            <li>Ortega</li>
-            <li>Murray Hill</li>
-            <li>Downtown Jacksonville</li>
-            <li>Springfield</li>
-            <li>Northside</li>
-            <li>Oceanway</li>
-            <li>Yulee</li>
-            <li>Fernandina Beach</li>
-            <li>Green Cove Springs</li>
-            <li>Orange Park</li>
-            <li>Fleming Island</li>
-            <li>Palm Valley</li>
-          </ul>
+      <div class="nav-menu" id="siteMenu">
+        <a class="nav-link" href="#about">Nosotros</a>
+        <a class="nav-link" href="#prices">Servicios</a>
+        <a class="nav-link" href="#works">Trabajos</a>
+        <a class="nav-link" href="#contact">Reservar</a>
+        <div class="nav-item">
+          <button type="button" class="nav-btn" aria-haspopup="true" aria-expanded="false">
+            Zonas
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown" role="region" aria-label="Zonas de servicio">
+            <p class="dropdown-title">Zonas que atendemos</p>
+            <p class="dropdown-note">Jacksonville, FL y alrededores — servicio a domicilio</p>
+            <ul class="dropdown-list">
+              <li>Ponte Vedra Beach</li>
+              <li>Nocatee</li>
+              <li>Jacksonville Beach</li>
+              <li>Neptune Beach</li>
+              <li>Atlantic Beach</li>
+              <li>Mandarin</li>
+              <li>San Marco</li>
+              <li>Baymeadows</li>
+              <li>Southside</li>
+              <li>Arlington</li>
+              <li>Riverside</li>
+              <li>Avondale</li>
+              <li>Ortega</li>
+              <li>Murray Hill</li>
+              <li>Downtown Jacksonville</li>
+              <li>Springfield</li>
+              <li>Northside</li>
+              <li>Oceanway</li>
+              <li>Yulee</li>
+              <li>Fernandina Beach</li>
+              <li>Green Cove Springs</li>
+              <li>Orange Park</li>
+              <li>Fleming Island</li>
+              <li>Palm Valley</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="lang-switch-group nav-spacer" role="group" aria-label="Idioma">
         <i class="fa-solid fa-globe lang-globe" aria-hidden="true"></i>
-        <a class="nav-link lang-switch" href="./index.html" lang="ru">RU</a>
+        <a class="nav-link lang-switch" href="./index-ru.html" lang="ru">RU</a>
         <span class="lang-sep" aria-hidden="true">–</span>
-        <a class="nav-link lang-switch" href="./index-en.html" lang="en">EN</a>
+        <a class="nav-link lang-switch" href="./index.html" lang="en">EN</a>
       </div>
+      <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-controls="siteMenu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -162,12 +169,18 @@
           <li>Superficies interiores</li>
           <li>Motor (básico)</li>
         </ul>
-        <div class="price-sub">Sedán: $180 – $220</div>
-        <div class="price-sub">SUV (5 plazas): $200 – $250</div>
-        <div class="price-sub">Furgoneta (7 plazas): $200 – $280</div>
-        <div class="price-sub">Pickup (2 puertas): $210 – $250</div>
-        <div class="price-sub">Pickup (4 puertas): $230 – $280</div>
-        <div class="price-sub">Camión grande: $300 – $400</div>
+        <div class="price-head">
+          <div class="price price-main-neutral">desde $180 hasta $400</div>
+          <button type="button" class="price-more-btn" aria-expanded="false" aria-controls="price-full-detail">Más detalles</button>
+        </div>
+        <div class="price-details" id="price-full-detail" hidden>
+          <div class="price-sub">Sedán: $180 – $220</div>
+          <div class="price-sub">SUV (5 plazas): $200 – $250</div>
+          <div class="price-sub">Furgoneta (7 plazas): $200 – $280</div>
+          <div class="price-sub">Pickup (2 puertas): $210 – $250</div>
+          <div class="price-sub">Pickup (4 puertas): $230 – $280</div>
+          <div class="price-sub">Camión grande: $300 – $400</div>
+        </div>
       </div>
       <div class="card">
         <h3><i class="fa-solid fa-engine"></i> Limpieza de motor</h3>
@@ -188,9 +201,15 @@
           <li>Lavados más fáciles</li>
           <li>Menos opacidad y desgaste leve</li>
         </ul>
-        <div class="price-sub">Sedán: $500 – $650</div>
-        <div class="price-sub">SUV: $600 – $650</div>
-        <div class="price-sub">Pickup grande: $700 – $750</div>
+        <div class="price-head">
+          <div class="price price-main-neutral">desde $500 hasta $700</div>
+          <button type="button" class="price-more-btn" aria-expanded="false" aria-controls="price-ceramic-paint">Más detalles</button>
+        </div>
+        <div class="price-details" id="price-ceramic-paint" hidden>
+          <div class="price-sub">Sedán: $500 – $650</div>
+          <div class="price-sub">SUV: $600 – $650</div>
+          <div class="price-sub">Pickup grande: $700 – $750</div>
+        </div>
       </div>
       <div class="card">
         <h3><i class="fa-solid fa-hand-sparkles"></i> Cerámica en cuero (interior)</h3>
@@ -220,7 +239,7 @@
       <form class="contact-form" action="#" method="post">
         <label class="form-field">
           <span>Teléfono</span>
-          <input type="tel" name="phone" placeholder="+1 (___) ___-____" autocomplete="tel" required>
+          <input type="tel" name="phone" placeholder="(123) 456-7890" autocomplete="tel-national" inputmode="numeric" maxlength="14" pattern="^\(\d{3}\) \d{3}-\d{4}$" required>
         </label>
         <div class="form-row">
           <label class="form-field">
@@ -257,10 +276,10 @@
       </form>
       <div class="contact-links">
         <a class="contact-link" href="tel:+19046605360">(904) 660-5360</a>
-        <a class="contact-link" href="https://maps.app.goo.gl/UYf6R72QFhXnnw2x5" target="_blank" rel="noopener noreferrer" aria-label="Reseñas en Google Maps">
+        <!-- <a class="contact-link" href="https://maps.app.goo.gl/UYf6R72QFhXnnw2x5" target="_blank" rel="noopener noreferrer" aria-label="Reseñas en Google Maps">
           <i class="fa-brands fa-google"></i>
           Reseñas en Google Maps
-        </a>
+        </a> -->
         <a class="contact-link social-link" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>

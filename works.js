@@ -3,7 +3,7 @@ export async function getDataFromGoogleSheet() {
   const sheetName = "Лист1";
 
   // 👉 Берём конкретно ячейку D1
-  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&range=D1`;
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&range=J1`;
 
   const res = await fetch(url);
   const text = await res.text();
@@ -16,6 +16,7 @@ export async function getDataFromGoogleSheet() {
 
   // 👉 Преобразуем в массив объектов
   const dataArray = JSON.parse(jsonString);
+  console.log(dataArray)
   renderWorks(dataArray)
   //return dataArray;//
 }
@@ -23,40 +24,65 @@ export async function getDataFromGoogleSheet() {
 
 function renderWorks(data) {
   const container = document.querySelector(".works-grid");
-
-  // очищаем перед рендером
   container.innerHTML = "";
 
-  data.forEach(item => {
-    // 👉 пропускаем пустые записи
-    if (!item.carModel || !item.service || item.imgList.length === 0) return;
+  const lang = document.documentElement.lang || "en";
 
-    // 👉 формируем data-media (все изображения)
+  const serviceLabel = {
+    en: "Service",
+    ru: "Услуга",
+    es: "Servicio"
+  };
+
+  // 👉 более надёжная проверка видео
+  const isVideo = (url) => {
+    return url.match(/\.(mp4|webm|ogg|mov)(\?|$)/i) || url.includes("video");
+  };
+
+  data.forEach(item => {
+    if (!item.carModel || item.imgList.length === 0) return;
+
+    // 👉 язык
+    const serviceMap = {
+      ru: "serviceRu",
+      en: "serviceEn",
+      es: "serviceEs"
+    };
+
+    const key = serviceMap[lang] || "serviceEn";
+    const serviceText = item[key] || item.serviceEn || "";
+
+    // 👉 формируем media
     const media = item.imgList.map(link => ({
-      type: "image",
+      type: isVideo(link) ? "video" : "image",
       src: link
     }));
 
-    // 👉 первая картинка как превью
     const preview = item.imgList[0];
+    const previewIsVideo = isVideo(preview);
 
     const card = document.createElement("article");
     card.className = "work-card";
 
     card.setAttribute("data-title", item.carModel);
-    card.setAttribute("data-service", item.service);
+    card.setAttribute("data-service", serviceText);
     card.setAttribute("data-media", JSON.stringify(media));
+
+    // 👉 превью (видео или картинка)
+    const mediaHTML = previewIsVideo
+      ? `<video src="${preview}" muted playsinline autoplay loop></video>`
+      : `<img src="${preview}" alt="${item.carModel}">`;
 
     card.innerHTML = `
       <div class="work-media">
-        <img src="${preview}" alt="${item.carModel}">
+        ${mediaHTML}
       </div>
       <div class="work-info">
         <h3>${item.carModel}</h3>
-        <button type="button" class="work-open-btn" aria-label="Открыть галерею работы">
+        <button type="button" class="work-open-btn" aria-label="Open gallery">
           <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
         </button>
-        <p>Услуга: ${item.service}</p>
+        <p>${serviceLabel[lang] || serviceLabel.en}: ${serviceText}</p>
       </div>
     `;
 
