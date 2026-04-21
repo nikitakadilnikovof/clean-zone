@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="./style.css">
   <script src="./scripts.js" type="module" defer></script>
 </head>
+
 <body>
   <header class="header">
     <div class="nav" role="navigation" aria-label="Основное меню">
@@ -64,7 +66,8 @@
         <span class="lang-sep" aria-hidden="true">–</span>
         <a class="nav-link lang-switch" href="./index-es.html" lang="es">ES</a>
       </div>
-      <button type="button" class="menu-toggle" aria-label="Открыть меню" aria-controls="siteMenu" aria-expanded="false">
+      <button type="button" class="menu-toggle" aria-label="Открыть меню" aria-controls="siteMenu"
+        aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -73,7 +76,7 @@
   </header>
 
   <section class="hero">
- 
+
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
@@ -86,7 +89,7 @@
   </section>
 
   <section id="about" class="section section-alt">
-    <div  class="container">
+    <div class="container">
       <h2>О нас</h2>
       <p class="lead">
         Ваш автомобиль — это не просто средство передвижения, это отражение вас.
@@ -177,7 +180,8 @@
         </ul>
         <div class="price-head">
           <div class="price price-main-neutral">от $180 до $400</div>
-          <button type="button" class="price-more-btn" aria-expanded="false" aria-controls="price-full-detail">Подробнее</button>
+          <button type="button" class="price-more-btn" aria-expanded="false"
+            aria-controls="price-full-detail">Подробнее</button>
         </div>
         <div class="price-details" id="price-full-detail" hidden>
           <div class="price-sub">Седан: $180 – $220</div>
@@ -211,7 +215,8 @@
         </ul>
         <div class="price-head">
           <div class="price price-main-neutral">от $500 до $700</div>
-          <button type="button" class="price-more-btn" aria-expanded="false" aria-controls="price-ceramic-paint">Подробнее</button>
+          <button type="button" class="price-more-btn" aria-expanded="false"
+            aria-controls="price-ceramic-paint">Подробнее</button>
         </div>
         <div class="price-details" id="price-ceramic-paint" hidden>
           <div class="price-sub">Седан: $500 – $650</div>
@@ -239,18 +244,14 @@
       <p class="lead">Примеры детейлинга: фото и видео по реальным проектам.</p>
 
       <div class="works-grid">
-        <article
-          class="work-card"
-          data-title="BMW X5"
-          data-service="Полный детейлинг (салон + кузов)"
-          data-media='[
+        <article class="work-card" data-title="BMW X5" data-service="Полный детейлинг (салон + кузов)" data-media='[
             {"type":"image","src":"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1400&q=80"},
             {"type":"image","src":"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80"},
             {"type":"video","src":"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"}
-          ]'
-        >
+          ]'>
           <div class="work-media">
-            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80" alt="BMW X5 после детейлинга">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80"
+              alt="BMW X5 после детейлинга">
           </div>
           <div class="work-info">
             <h3>BMW X5</h3>
@@ -261,17 +262,13 @@
           </div>
         </article>
 
-        <article
-          class="work-card"
-          data-title="Mercedes C-Class"
-          data-service="Керамика кузова"
-          data-media='[
+        <article class="work-card" data-title="Mercedes C-Class" data-service="Керамика кузова" data-media='[
             {"type":"image","src":"https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1400&q=80"},
             {"type":"image","src":"https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1400&q=80"}
-          ]'
-        >
+          ]'>
           <div class="work-media">
-            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1000&q=80" alt="Mercedes C-Class после керамики">
+            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1000&q=80"
+              alt="Mercedes C-Class после керамики">
           </div>
           <div class="work-info">
             <h3>Mercedes C-Class</h3>
@@ -292,7 +289,8 @@
       <form class="contact-form" action="#" method="post">
         <label class="form-field">
           <span>Номер телефона</span>
-          <input type="tel" name="phone" placeholder="(123) 456-7890" autocomplete="tel-national" inputmode="numeric" maxlength="14" pattern="^\(\d{3}\) \d{3}-\d{4}$" required>
+          <input type="tel" name="phone" placeholder="(123) 456-7890" autocomplete="tel-national" inputmode="numeric"
+            maxlength="14" pattern="^\(\d{3}\) \d{3}-\d{4}$" required>
         </label>
         <div class="form-row">
           <label class="form-field">
@@ -304,7 +302,8 @@
             <input type="time" name="time" min="06:00" max="21:00" required>
           </label>
         </div>
-        <p class="form-hint">Запись на сегодня и на будущие дни. Доступно только время с 06:00 до 21:00; интервал с 21:00 до 06:00 выбрать нельзя.</p>
+        <p class="form-hint">Запись на сегодня и на будущие дни. Доступно только время с 06:00 до 21:00; интервал с
+          21:00 до 06:00 выбрать нельзя.</p>
         <div class="service-group">
           <label class="form-field service-main-field">
             <span>Услуга</span>
@@ -323,8 +322,47 @@
               </button>
             </div>
           </label>
+
+
           <div class="extra-services"></div>
         </div>
+        <label class="form-field service-main-field">
+          <span>Район</span>
+          <div class="area-main-row">
+            <select name="area" class="area-main-select" required>
+              <option>Выберите район</option>
+              <option>Ponte Vedra Beach</option>
+              <option>Nocatee</option>
+              <option>Jacksonville Beach</option>
+              <option>Neptune Beach</option>
+              <option>Atlantic Beach</option>
+              <option>Mandarin</option>
+              <option>San Marco</option>
+              <option>Baymeadows</option>
+              <option>Southside</option>
+              <option>Arlington</option>
+              <option>Riverside</option>
+              <option>Avondale</option>
+              <option>Ortega</option>
+              <option>Murray Hill</option>
+              <option>Downtown Jacksonville</option>
+              <option>Springfield</option>
+              <option>Northside</option>
+              <option>Yulee</option>
+              <option>Fernandina Beach</option>
+              <option>Fernandina Beach</option>
+              <option>Green Cove Springs</option>
+              <option>Orange Park</option>
+              <option>Fleming Island</option>
+              <option>Palm Valley</option>
+
+
+            </select>
+            <button type="button" class="add-service-btn" aria-label="Добавить дополнительную услугу">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </label>
         <button type="submit">Оставить заявку</button>
       </form>
       <div class="contact-links">
@@ -333,7 +371,9 @@
           <i class="fa-brands fa-google"></i>
           Отзывы в Google Картах
         </a> -->
-        <a class="contact-link social-link" href="https://www.instagram.com/_clean_zone_01?igsh=d2FtZWR1azd1cXVj&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <a class="contact-link social-link"
+          href="https://www.instagram.com/_clean_zone_01?igsh=d2FtZWR1azd1cXVj&utm_source=qr" target="_blank"
+          rel="noopener noreferrer" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
       </div>
@@ -353,4 +393,5 @@
     </button>
   </div>
 </body>
+
 </html>

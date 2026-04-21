@@ -34,7 +34,6 @@ function renderWorks(data) {
     es: "Servicio"
   };
 
-  // 👉 более надёжная проверка видео
   const isVideo = (url) => {
     return url.match(/\.(mp4|webm|ogg|mov)(\?|$)/i) || url.includes("video");
   };
@@ -42,7 +41,6 @@ function renderWorks(data) {
   data.forEach(item => {
     if (!item.carModel || item.imgList.length === 0) return;
 
-    // 👉 язык
     const serviceMap = {
       ru: "serviceRu",
       en: "serviceEn",
@@ -52,26 +50,37 @@ function renderWorks(data) {
     const key = serviceMap[lang] || "serviceEn";
     const serviceText = item[key] || item.serviceEn || "";
 
-    // 👉 формируем media
     const media = item.imgList.map(link => ({
       type: isVideo(link) ? "video" : "image",
       src: link
     }));
 
-    const preview = item.imgList[0];
-    const previewIsVideo = isVideo(preview);
+    const preview = media[0];
+    const previewIsVideo = preview.type === "video";
 
     const card = document.createElement("article");
     card.className = "work-card";
 
-    card.setAttribute("data-title", item.carModel);
-    card.setAttribute("data-service", serviceText);
-    card.setAttribute("data-media", JSON.stringify(media));
+    card.dataset.title = item.carModel;
+    card.dataset.service = serviceText;
+    card.dataset.media = JSON.stringify(media);
 
-    // 👉 превью (видео или картинка)
-    const mediaHTML = previewIsVideo
-      ? `<video src="${preview}" muted playsinline autoplay loop></video>`
-      : `<img src="${preview}" alt="${item.carModel}">`;
+    // 🔥 превью
+    let mediaHTML = "";
+
+    if (previewIsVideo) {
+      mediaHTML = `
+        <video 
+          src="${preview.src}" 
+          class="work-preview-video"
+          muted 
+          preload="metadata"
+          playsinline 
+        ></video>
+      `;
+    } else {
+      mediaHTML = `<img src="${preview.src}" alt="${item.carModel}">`;
+    }
 
     card.innerHTML = `
       <div class="work-media">
@@ -87,5 +96,35 @@ function renderWorks(data) {
     `;
 
     container.appendChild(card);
+  });
+
+  // 🔥 Гарантированно убираем звук у всех превью
+  const videos = container.querySelectorAll("video");
+  videos.forEach(video => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+  });
+
+  const previewVideos = container.querySelectorAll(".work-preview-video");
+  previewVideos.forEach(video => {
+    const setMiddleFrame = () => {
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      const middleTime = Math.max(0.1, video.duration / 2);
+      video.currentTime = middleTime;
+    };
+
+    const freezeFrame = () => {
+      video.pause();
+      video.currentTime = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+    };
+
+    if (video.readyState >= 1) {
+      setMiddleFrame();
+    } else {
+      video.addEventListener("loadedmetadata", setMiddleFrame, { once: true });
+    }
+
+    video.addEventListener("seeked", freezeFrame, { once: true });
   });
 }

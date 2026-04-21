@@ -113,58 +113,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const pageLang = (document.documentElement.getAttribute("lang") || "ru").slice(0, 2);
   const FORM_I18N = {
-  ru: {
-    extraService: 'Доп услуга',
-    fillFields: 'Заполните все поля формы.',
-    businessHours: 'Выберите время с 06:00 до 21:00.',
-    futureTime: 'Выберите работающее время: с 06:00 до 21:00 и не раньше текущего момента.',
-    sending: 'Отправляем заявку...',
-    sentOk: 'Заявка отправлена в Telegram.',
-    sentFail: 'Не удалось отправить в Telegram. Данные сохранены локально для теста.',
-    tgTitle: 'Новая заявка с сайта Clean Zone',
-    tgPhone: 'Телефон',
-    tgDate: 'Дата',
-    tgTime: 'Время',
-    tgService: 'Услуга',
-    tgExtras: 'Доп. услуги',
-    tgExtrasNone: 'нет',
-    phoneInvalid: 'Введите телефон в формате США: (123) 456-7890.'
-  },
-  en: {
-    extraService: 'Add-on service',
-    fillFields: 'Please fill in all fields.',
-    businessHours: 'Choose a time between 6:00 AM and 9:00 PM.',
-    futureTime: 'Choose a future appointment within business hours (6:00 AM – 9:00 PM).',
-    sending: 'Sending your request...',
-    sentOk: 'Request sent to Telegram.',
-    sentFail: 'Could not send to Telegram. Data saved locally for testing.',
-    tgTitle: 'New request from Clean Zone website',
-    tgPhone: 'Phone',
-    tgDate: 'Date',
-    tgTime: 'Time',
-    tgService: 'Service',
-    tgExtras: 'Add-on services',
-    tgExtrasNone: 'none',
-    phoneInvalid: 'Enter a US phone number in this format: (123) 456-7890.'
-  },
-  es: {
-    extraService: 'Servicio adicional',
-    fillFields: 'Complete todos los campos.',
-    businessHours: 'Elija una hora entre las 6:00 y las 21:00.',
-    futureTime: 'Elija fecha y hora futuras dentro del horario (6:00 – 21:00).',
-    sending: 'Enviando solicitud...',
-    sentOk: 'Solicitud enviada a Telegram.',
-    sentFail: 'No se pudo enviar a Telegram. Los datos se guardaron localmente para pruebas.',
-    tgTitle: 'Nueva solicitud desde el sitio Clean Zone',
-    tgPhone: 'Teléfono',
-    tgDate: 'Fecha',
-    tgTime: 'Hora',
-    tgService: 'Servicio',
-    tgExtras: 'Servicios adicionales',
-    tgExtrasNone: 'ninguno',
-    phoneInvalid: 'Ingrese un telefono de EE. UU. en formato: (123) 456-7890.'
-  }
-};
+    ru: {
+      extraService: 'Доп услуга',
+      fillFields: 'Заполните все поля формы.',
+      businessHours: 'Выберите время с 06:00 до 21:00.',
+      futureTime: 'Выберите работающее время: с 06:00 до 21:00 и не раньше текущего момента.',
+      sending: 'Отправляем заявку...',
+      sentOk: 'Заявка отправлена в Telegram.',
+      sentFail: 'Не удалось отправить в Telegram. Данные сохранены локально для теста.',
+      tgTitle: 'Новая заявка с сайта Clean Zone',
+      tgPhone: 'Телефон',
+      tgDate: 'Дата',
+      tgTime: 'Время',
+      tgService: 'Услуга',
+      tgExtras: 'Доп. услуги',
+      tgArea: "Район",
+      tgExtrasNone: 'нет',
+      phoneInvalid: 'Введите телефон в формате США: (123) 456-7890.'
+
+    },
+    en: {
+      extraService: 'Add-on service',
+      fillFields: 'Please fill in all fields.',
+      businessHours: 'Choose a time between 6:00 AM and 9:00 PM.',
+      futureTime: 'Choose a future appointment within business hours (6:00 AM – 9:00 PM).',
+      sending: 'Sending your request...',
+      sentOk: 'Request sent to Telegram.',
+      sentFail: 'Could not send to Telegram. Data saved locally for testing.',
+      tgTitle: 'New request from Clean Zone website',
+      tgPhone: 'Phone',
+      tgDate: 'Date',
+      tgTime: 'Time',
+      tgService: 'Service',
+      tgExtras: 'Add-on services',
+      tgExtrasNone: 'none',
+      phoneInvalid: 'Enter a US phone number in this format: (123) 456-7890.'
+    },
+    es: {
+      extraService: 'Servicio adicional',
+      fillFields: 'Complete todos los campos.',
+      businessHours: 'Elija una hora entre las 6:00 y las 21:00.',
+      futureTime: 'Elija fecha y hora futuras dentro del horario (6:00 – 21:00).',
+      sending: 'Enviando solicitud...',
+      sentOk: 'Solicitud enviada a Telegram.',
+      sentFail: 'No se pudo enviar a Telegram. Los datos se guardaron localmente para pruebas.',
+      tgTitle: 'Nueva solicitud desde el sitio Clean Zone',
+      tgPhone: 'Teléfono',
+      tgDate: 'Fecha',
+      tgTime: 'Hora',
+      tgService: 'Servicio',
+      tgExtras: 'Servicios adicionales',
+      tgExtrasNone: 'ninguno',
+      phoneInvalid: 'Ingrese un telefono de EE. UU. en formato: (123) 456-7890.'
+    }
+  };
   const tf = (key) => FORM_I18N[pageLang]?.[key] ?? FORM_I18N.ru[key];
 
   const priceMoreButtons = Array.from(document.querySelectorAll(".price-more-btn"));
@@ -219,332 +221,336 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const contactForm = document.querySelector(".contact-form");
   if (contactForm) {
-  const dateInput = contactForm.querySelector('input[name="date"]');
-  const timeInput = contactForm.querySelector('input[name="time"]');
-  const serviceSelect = contactForm.querySelector('.service-main-select');
-  const addServiceBtn = contactForm.querySelector('.add-service-btn');
-  const extraServicesEl = contactForm.querySelector('.extra-services');
-  const submitButton = contactForm.querySelector('button[type="submit"]');
-  const statusEl = document.createElement('p');
-  statusEl.className = 'form-status';
-  statusEl.setAttribute('aria-live', 'polite');
-  contactForm.append(statusEl);
+    const dateInput = contactForm.querySelector('input[name="date"]');
+    const timeInput = contactForm.querySelector('input[name="time"]');
+    const serviceSelect = contactForm.querySelector('.service-main-select');
+    const addServiceBtn = contactForm.querySelector('.add-service-btn');
+    const extraServicesEl = contactForm.querySelector('.extra-services');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const statusEl = document.createElement('p');
+    statusEl.className = 'form-status';
+    statusEl.setAttribute('aria-live', 'polite');
+    contactForm.append(statusEl);
 
-  const setStatus = (text, isError = false) => {
-    statusEl.textContent = text;
-    statusEl.classList.toggle('error', isError);
-    statusEl.classList.toggle('success', !isError && text.length > 0);
-  };
+    const setStatus = (text, isError = false) => {
+      statusEl.textContent = text;
+      statusEl.classList.toggle('error', isError);
+      statusEl.classList.toggle('success', !isError && text.length > 0);
+    };
 
-  const normalizeUsPhone = (raw) => {
-    const digits = raw.replace(/\D/g, '').slice(0, 10);
-    const p1 = digits.slice(0, 3);
-    const p2 = digits.slice(3, 6);
-    const p3 = digits.slice(6, 10);
-    if (digits.length <= 3) return p1 ? `(${p1}` : '';
-    if (digits.length <= 6) return `(${p1}) ${p2}`;
-    return `(${p1}) ${p2}-${p3}`;
-  };
+    const normalizeUsPhone = (raw) => {
+      const digits = raw.replace(/\D/g, '').slice(0, 10);
+      const p1 = digits.slice(0, 3);
+      const p2 = digits.slice(3, 6);
+      const p3 = digits.slice(6, 10);
+      if (digits.length <= 3) return p1 ? `(${p1}` : '';
+      if (digits.length <= 6) return `(${p1}) ${p2}`;
+      return `(${p1}) ${p2}-${p3}`;
+    };
 
-  const isValidUsPhone = (value) => /^\(\d{3}\) \d{3}-\d{4}$/.test(value);
+    const isValidUsPhone = (value) => /^\(\d{3}\) \d{3}-\d{4}$/.test(value);
 
-  const saveRequestLocally = (request) => {
-    const raw = localStorage.getItem(REQUESTS_STORAGE_KEY);
-    const list = raw ? JSON.parse(raw) : [];
-    list.push(request);
-    localStorage.setItem(REQUESTS_STORAGE_KEY, JSON.stringify(list));
-  };
+    const saveRequestLocally = (request) => {
+      const raw = localStorage.getItem(REQUESTS_STORAGE_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      list.push(request);
+      localStorage.setItem(REQUESTS_STORAGE_KEY, JSON.stringify(list));
+    };
 
-  const formatDateInputValue = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
+    const formatDateInputValue = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
 
-  const pad2 = (n) => String(n).padStart(2, '0');
+    const pad2 = (n) => String(n).padStart(2, '0');
 
-  const formatTimeFromDate = (d) => `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+    const formatTimeFromDate = (d) => `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
 
-  const timeStrToMinutes = (t) => {
-    const [h, m] = t.split(':').map(Number);
-    return h * 60 + m;
-  };
+    const timeStrToMinutes = (t) => {
+      const [h, m] = t.split(':').map(Number);
+      return h * 60 + m;
+    };
 
-  const BUSINESS_START = '06:00';
-  const BUSINESS_END = '21:00';
+    const BUSINESS_START = '06:00';
+    const BUSINESS_END = '21:00';
 
-  const isTimeInBusinessHours = (timeStr) => {
-    const mins = timeStrToMinutes(timeStr);
-    return mins >= 6 * 60 && mins <= 21 * 60;
-  };
+    const isTimeInBusinessHours = (timeStr) => {
+      const mins = timeStrToMinutes(timeStr);
+      return mins >= 6 * 60 && mins <= 21 * 60;
+    };
 
-  const getTodayStr = () => formatDateInputValue(new Date());
+    const getTodayStr = () => formatDateInputValue(new Date());
 
-  const syncDateTimeConstraints = () => {
-    if (!dateInput || !timeInput) return;
+    const syncDateTimeConstraints = () => {
+      if (!dateInput || !timeInput) return;
 
-    const todayStr = getTodayStr();
-    dateInput.min = todayStr;
+      const todayStr = getTodayStr();
+      dateInput.min = todayStr;
 
-    let dateVal = dateInput.value;
-    if (!dateVal || dateVal < todayStr) {
-      dateVal = todayStr;
-      dateInput.value = dateVal;
-    }
+      let dateVal = dateInput.value;
+      if (!dateVal || dateVal < todayStr) {
+        dateVal = todayStr;
+        dateInput.value = dateVal;
+      }
 
-    const now = new Date();
-    const endToday = new Date();
-    endToday.setHours(21, 0, 0, 0);
+      const now = new Date();
+      const endToday = new Date();
+      endToday.setHours(21, 0, 0, 0);
 
-    if (dateVal === todayStr && now >= endToday) {
-      const tmr = new Date();
-      tmr.setDate(tmr.getDate() + 1);
-      dateVal = formatDateInputValue(tmr);
-      dateInput.value = dateVal;
-    }
-
-    timeInput.max = BUSINESS_END;
-
-    if (dateVal === todayStr) {
-      const startToday = new Date();
-      startToday.setHours(6, 0, 0, 0);
-      let earliest = new Date(now.getTime() + 5 * 60000);
-      if (earliest < startToday) earliest = startToday;
-      const endSlot = new Date();
-      endSlot.setHours(21, 0, 0, 0);
-      if (earliest > endSlot) {
+      if (dateVal === todayStr && now >= endToday) {
         const tmr = new Date();
         tmr.setDate(tmr.getDate() + 1);
         dateVal = formatDateInputValue(tmr);
         dateInput.value = dateVal;
+      }
+
+      timeInput.max = BUSINESS_END;
+
+      if (dateVal === todayStr) {
+        const startToday = new Date();
+        startToday.setHours(6, 0, 0, 0);
+        let earliest = new Date(now.getTime() + 5 * 60000);
+        if (earliest < startToday) earliest = startToday;
+        const endSlot = new Date();
+        endSlot.setHours(21, 0, 0, 0);
+        if (earliest > endSlot) {
+          const tmr = new Date();
+          tmr.setDate(tmr.getDate() + 1);
+          dateVal = formatDateInputValue(tmr);
+          dateInput.value = dateVal;
+          timeInput.min = BUSINESS_START;
+        } else {
+          timeInput.min = formatTimeFromDate(earliest);
+        }
+      }
+
+      if (dateVal !== todayStr) {
         timeInput.min = BUSINESS_START;
-      } else {
-        timeInput.min = formatTimeFromDate(earliest);
-      }
-    }
-
-    if (dateVal !== todayStr) {
-      timeInput.min = BUSINESS_START;
-    }
-
-    if (!timeInput.value || timeInput.value < timeInput.min) {
-      timeInput.value = timeInput.min;
-    }
-    if (timeInput.value > timeInput.max) {
-      timeInput.value = timeInput.max;
-    }
-  };
-
-  const enforceTimeInWindow = () => {
-    if (!timeInput?.value) return;
-    const lo = timeStrToMinutes(timeInput.min || BUSINESS_START);
-    const hi = timeStrToMinutes(timeInput.max || BUSINESS_END);
-    let m = timeStrToMinutes(timeInput.value);
-    if (Number.isNaN(m)) return;
-    if (m < lo) m = lo;
-    if (m > hi) m = hi;
-    timeInput.value = `${pad2(Math.floor(m / 60))}:${pad2(m % 60)}`;
-  };
-
-  const onTimeFieldUpdate = () => {
-    syncDateTimeConstraints();
-    enforceTimeInWindow();
-  };
-
-  syncDateTimeConstraints();
-  enforceTimeInWindow();
-  dateInput?.addEventListener('change', syncDateTimeConstraints);
-  dateInput?.addEventListener('input', syncDateTimeConstraints);
-  timeInput?.addEventListener('focus', onTimeFieldUpdate);
-  timeInput?.addEventListener('change', onTimeFieldUpdate);
-  timeInput?.addEventListener('input', onTimeFieldUpdate);
-  timeInput?.addEventListener('blur', enforceTimeInWindow);
-
-  const allServiceOptions = Array.from(serviceSelect?.options ?? [])
-    .filter((opt) => opt.value)
-    .map((opt) => ({ value: opt.value, label: opt.textContent?.trim() || opt.value }));
-
-  const getAdditionalSelects = () => Array.from(contactForm.querySelectorAll('select[name="extraService[]"]'));
-
-  const getSelectedValues = () => {
-    const values = new Set();
-    if (serviceSelect?.value) values.add(serviceSelect.value);
-    for (const select of getAdditionalSelects()) {
-      if (select.value) values.add(select.value);
-    }
-    return values;
-  };
-
-  const buildServiceOptions = (currentValue = '') => {
-    const selected = getSelectedValues();
-    if (currentValue) selected.delete(currentValue);
-    return allServiceOptions.filter((opt) => !selected.has(opt.value));
-  };
-
-  const refreshAddServiceButton = () => {
-    if (!addServiceBtn || !serviceSelect) return;
-    const canShow = Boolean(serviceSelect.value);
-    const availableCount = buildServiceOptions().length;
-    addServiceBtn.classList.toggle('visible', canShow);
-    addServiceBtn.disabled = !canShow || availableCount === 0;
-  };
-
-  const refreshAdditionalSelects = () => {
-    for (const select of getAdditionalSelects()) {
-      const currentValue = select.value;
-      const options = buildServiceOptions(currentValue);
-      select.innerHTML = '';
-
-      for (const option of options) {
-        const optEl = document.createElement('option');
-        optEl.value = option.value;
-        optEl.textContent = option.label;
-        select.append(optEl);
       }
 
-      if (options.some((opt) => opt.value === currentValue)) {
-        select.value = currentValue;
-      } else if (options[0]) {
-        select.value = options[0].value;
-      } else {
-        select.closest('.extra-service-row')?.remove();
+      if (!timeInput.value || timeInput.value < timeInput.min) {
+        timeInput.value = timeInput.min;
       }
-    }
-
-    refreshAddServiceButton();
-  };
-
-  const createExtraServiceRow = () => {
-    if (!extraServicesEl) return;
-
-    const row = document.createElement('div');
-    row.className = 'extra-service-row';
-
-    const label = document.createElement('label');
-    label.className = 'form-field';
-    const title = document.createElement('span');
-    title.textContent = tf('extraService');
-    const select = document.createElement('select');
-    select.name = 'extraService[]';
-
-    label.append(title, select);
-    row.append(label);
-    extraServicesEl.append(row);
-
-    select.addEventListener('change', refreshAdditionalSelects);
-    refreshAdditionalSelects();
-  };
-
-  serviceSelect?.addEventListener('change', () => {
-    refreshAdditionalSelects();
-    refreshAddServiceButton();
-  });
-
-  addServiceBtn?.addEventListener('click', () => {
-    if (buildServiceOptions().length === 0) return;
-    createExtraServiceRow();
-  });
-
-  refreshAddServiceButton();
-
-  const phoneInput = contactForm.querySelector('input[name="phone"]');
-  phoneInput?.addEventListener('input', () => {
-    phoneInput.value = normalizeUsPhone(phoneInput.value);
-  });
-
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    syncDateTimeConstraints();
-    enforceTimeInWindow();
-    const formData = new FormData(contactForm);
-
-    const phone = String(formData.get('phone') ?? '').trim();
-    const date = String(formData.get('date') ?? '').trim();
-    const time = String(timeInput?.value ?? formData.get('time') ?? '').trim();
-    const service = String(formData.get('service') ?? '').trim();
-    const serviceLabel = contactForm.querySelector('select[name="service"] option:checked')?.textContent?.trim() || service;
-    const extraServices = getAdditionalSelects()
-      .map((select) => select.options[select.selectedIndex])
-      .filter(Boolean)
-      .map((opt) => ({ value: opt.value, label: opt.textContent?.trim() || opt.value }));
-
-    if (!phone || !date || !time || !service) {
-      setStatus(tf('fillFields'), true);
-      return;
-    }
-
-    if (!isValidUsPhone(phone)) {
-      setStatus(tf('phoneInvalid'), true);
-      return;
-    }
-
-    if (!isTimeInBusinessHours(time)) {
-      setStatus(tf('businessHours'), true);
-      return;
-    }
-
-    const selectedDateTime = new Date(`${date}T${time}`);
-    if (Number.isNaN(selectedDateTime.getTime()) || selectedDateTime <= new Date()) {
-      setStatus(tf('futureTime'), true);
-      return;
-    }
-
-    const requestPayload = {
-      phone,
-      date,
-      time,
-      service,
-      serviceLabel,
-      extraServices,
-      createdAt: new Date().toISOString()
+      if (timeInput.value > timeInput.max) {
+        timeInput.value = timeInput.max;
+      }
     };
 
-    saveRequestLocally(requestPayload);
+    const enforceTimeInWindow = () => {
+      if (!timeInput?.value) return;
+      const lo = timeStrToMinutes(timeInput.min || BUSINESS_START);
+      const hi = timeStrToMinutes(timeInput.max || BUSINESS_END);
+      let m = timeStrToMinutes(timeInput.value);
+      if (Number.isNaN(m)) return;
+      if (m < lo) m = lo;
+      if (m > hi) m = hi;
+      timeInput.value = `${pad2(Math.floor(m / 60))}:${pad2(m % 60)}`;
+    };
 
-    if (submitButton) submitButton.disabled = true;
-    setStatus(tf('sending'));
+    const onTimeFieldUpdate = () => {
+      syncDateTimeConstraints();
+      enforceTimeInWindow();
+    };
 
-    try {
-      const extrasLine = extraServices.length
-        ? extraServices.map((item) => item.label).join(', ')
-        : tf('tgExtrasNone');
-      const message = [
-        tf('tgTitle'),
-        `${tf('tgPhone')}: ${phone}`,
-        `${tf('tgDate')}: ${date}`,
-        `${tf('tgTime')}: ${time}`,
-        `${tf('tgService')}: ${serviceLabel}`,
-        `${tf('tgExtras')}: ${extrasLine}`
-      ].join('\n');
+    syncDateTimeConstraints();
+    enforceTimeInWindow();
+    dateInput?.addEventListener('change', syncDateTimeConstraints);
+    dateInput?.addEventListener('input', syncDateTimeConstraints);
+    timeInput?.addEventListener('focus', onTimeFieldUpdate);
+    timeInput?.addEventListener('change', onTimeFieldUpdate);
+    timeInput?.addEventListener('input', onTimeFieldUpdate);
+    timeInput?.addEventListener('blur', enforceTimeInWindow);
 
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message
-        })
-      });
+    const allServiceOptions = Array.from(serviceSelect?.options ?? [])
+      .filter((opt) => opt.value)
+      .map((opt) => ({ value: opt.value, label: opt.textContent?.trim() || opt.value }));
 
-      if (!response.ok) {
-        throw new Error(`Telegram API error: ${response.status}`);
+    const getAdditionalSelects = () => Array.from(contactForm.querySelectorAll('select[name="extraService[]"]'));
+
+    const getSelectedValues = () => {
+      const values = new Set();
+      if (serviceSelect?.value) values.add(serviceSelect.value);
+      for (const select of getAdditionalSelects()) {
+        if (select.value) values.add(select.value);
+      }
+      return values;
+    };
+
+    const buildServiceOptions = (currentValue = '') => {
+      const selected = getSelectedValues();
+      if (currentValue) selected.delete(currentValue);
+      return allServiceOptions.filter((opt) => !selected.has(opt.value));
+    };
+
+    const refreshAddServiceButton = () => {
+      if (!addServiceBtn || !serviceSelect) return;
+      const canShow = Boolean(serviceSelect.value);
+      const availableCount = buildServiceOptions().length;
+      addServiceBtn.classList.toggle('visible', canShow);
+      addServiceBtn.disabled = !canShow || availableCount === 0;
+    };
+
+    const refreshAdditionalSelects = () => {
+      for (const select of getAdditionalSelects()) {
+        const currentValue = select.value;
+        const options = buildServiceOptions(currentValue);
+        select.innerHTML = '';
+
+        for (const option of options) {
+          const optEl = document.createElement('option');
+          optEl.value = option.value;
+          optEl.textContent = option.label;
+          select.append(optEl);
+        }
+
+        if (options.some((opt) => opt.value === currentValue)) {
+          select.value = currentValue;
+        } else if (options[0]) {
+          select.value = options[0].value;
+        } else {
+          select.closest('.extra-service-row')?.remove();
+        }
       }
 
-      setStatus(tf('sentOk'));
-      contactForm.reset();
-      if (extraServicesEl) extraServicesEl.innerHTML = '';
-      syncDateTimeConstraints();
       refreshAddServiceButton();
-    } catch (error) {
-      console.error(error);
-      setStatus(tf('sentFail'), true);
-    } finally {
-      if (submitButton) submitButton.disabled = false;
-    }
-  });
+    };
+
+    const createExtraServiceRow = () => {
+      if (!extraServicesEl) return;
+
+      const row = document.createElement('div');
+      row.className = 'extra-service-row';
+
+      const label = document.createElement('label');
+      label.className = 'form-field';
+      const title = document.createElement('span');
+      title.textContent = tf('extraService');
+      const select = document.createElement('select');
+      select.name = 'extraService[]';
+
+      label.append(title, select);
+      row.append(label);
+      extraServicesEl.append(row);
+
+      select.addEventListener('change', refreshAdditionalSelects);
+      refreshAdditionalSelects();
+    };
+
+    serviceSelect?.addEventListener('change', () => {
+      refreshAdditionalSelects();
+      refreshAddServiceButton();
+    });
+
+    addServiceBtn?.addEventListener('click', () => {
+      if (buildServiceOptions().length === 0) return;
+      createExtraServiceRow();
+    });
+
+    refreshAddServiceButton();
+
+    const phoneInput = contactForm.querySelector('input[name="phone"]');
+    phoneInput?.addEventListener('input', () => {
+      phoneInput.value = normalizeUsPhone(phoneInput.value);
+    });
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      syncDateTimeConstraints();
+      enforceTimeInWindow();
+      const formData = new FormData(contactForm);
+
+      const phone = String(formData.get('phone') ?? '').trim();
+      const date = String(formData.get('date') ?? '').trim();
+      const time = String(timeInput?.value ?? formData.get('time') ?? '').trim();
+      const service = String(formData.get('service') ?? '').trim();
+      const serviceLabel = contactForm.querySelector('select[name="service"] option:checked')?.textContent?.trim() || service;
+      const area = String(formData.get('area') ?? '').trim();
+
+      const extraServices = getAdditionalSelects()
+        .map((select) => select.options[select.selectedIndex])
+        .filter(Boolean)
+        .map((opt) => ({ value: opt.value, label: opt.textContent?.trim() || opt.value }));
+
+      if (!phone || !date || !time || !service) {
+        setStatus(tf('fillFields'), true);
+        return;
+      }
+
+      if (!isValidUsPhone(phone)) {
+        setStatus(tf('phoneInvalid'), true);
+        return;
+      }
+
+      if (!isTimeInBusinessHours(time)) {
+        setStatus(tf('businessHours'), true);
+        return;
+      }
+
+      const selectedDateTime = new Date(`${date}T${time}`);
+      if (Number.isNaN(selectedDateTime.getTime()) || selectedDateTime <= new Date()) {
+        setStatus(tf('futureTime'), true);
+        return;
+      }
+
+      const requestPayload = {
+        phone,
+        date,
+        time,
+        service,
+        serviceLabel,
+        area,
+        extraServices,
+        createdAt: new Date().toISOString()
+      };
+
+      saveRequestLocally(requestPayload);
+
+      if (submitButton) submitButton.disabled = true;
+      setStatus(tf('sending'));
+
+      try {
+        const extrasLine = extraServices.length
+          ? extraServices.map((item) => item.label).join(', ')
+          : tf('tgExtrasNone');
+        const message = [
+          tf('tgTitle'),
+          `${tf('tgPhone')}: ${phone}`,
+          `${tf('tgDate')}: ${date}`,
+          `${tf('tgTime')}: ${time}`,
+          `${tf('tgService')}: ${serviceLabel}`,
+          `${tf('tgExtras')}: ${extrasLine}`,
+          `${tf('tgArea')}: ${area}`
+        ].join('\n');
+
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Telegram API error: ${response.status}`);
+        }
+
+        setStatus(tf('sentOk'));
+        contactForm.reset();
+        if (extraServicesEl) extraServicesEl.innerHTML = '';
+        syncDateTimeConstraints();
+        refreshAddServiceButton();
+      } catch (error) {
+        console.error(error);
+        setStatus(tf('sentFail'), true);
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
   }
 
   const workModal = document.getElementById("workModal");
@@ -558,95 +564,98 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
   const renderMedia = () => {
-  if (!modalContent || currentMedia.length === 0) return;
-  const item = currentMedia[currentIndex];
-  const isVideo = item.type === 'video';
+    if (!modalContent || currentMedia.length === 0) return;
+    const item = currentMedia[currentIndex];
+    const isVideo = item.type === 'video';
 
-  modalContent.innerHTML = '';
-  if (isVideo) {
-    const video = document.createElement('video');
-    video.src = item.src;
-    video.controls = true;
-    video.autoplay = true;
-    video.playsInline = true;
-    modalContent.append(video);
-  } else {
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = 'Фото выполненной работы';
-    modalContent.append(img);
-  }
+    modalContent.innerHTML = '';
+    if (isVideo) {
+      const video = document.createElement('video');
+      video.src = item.src;
+      video.controls = true;
+      video.autoplay = true;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.volume = 0;
+      video.playsInline = true;
+      modalContent.append(video);
+    } else {
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = 'Фото выполненной работы';
+      modalContent.append(img);
+    }
   };
 
   const setModalState = (open) => {
-  if (!workModal) return;
-  workModal.classList.toggle('open', open);
-  workModal.setAttribute('aria-hidden', String(!open));
-  document.body.style.overflow = open ? 'hidden' : '';
+    if (!workModal) return;
+    workModal.classList.toggle('open', open);
+    workModal.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
   };
 
   const openModal = (media) => {
-  if (!Array.isArray(media) || media.length === 0) return;
-  currentMedia = media;
-  currentIndex = 0;
-  renderMedia();
-  setModalState(true);
+    if (!Array.isArray(media) || media.length === 0) return;
+    currentMedia = media;
+    currentIndex = 0;
+    renderMedia();
+    setModalState(true);
   };
 
   const closeModal = () => setModalState(false);
 
   const showPrev = () => {
-  if (currentMedia.length < 2) return;
-  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-  renderMedia();
+    if (currentMedia.length < 2) return;
+    currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+    renderMedia();
   };
 
   const showNext = () => {
-  if (currentMedia.length < 2) return;
-  currentIndex = (currentIndex + 1) % currentMedia.length;
-  renderMedia();
+    if (currentMedia.length < 2) return;
+    currentIndex = (currentIndex + 1) % currentMedia.length;
+    renderMedia();
   };
 
   const parseCardMedia = (card) => {
-  if (!card) return [];
-  const raw = card.dataset.media || card.getAttribute('data-images') || '';
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed
-      .map((item) => {
-        if (typeof item === 'string') return { type: 'image', src: item };
-        if (item && typeof item === 'object' && item.src) {
-          return { type: item.type === 'video' ? 'video' : 'image', src: item.src };
-        }
-        return null;
-      })
-      .filter(Boolean);
-  } catch (error) {
-    console.error('Некорректный формат media у карточки:', error);
-    return [];
-  }
+    if (!card) return [];
+    const raw = card.dataset.media || card.getAttribute('data-images') || '';
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed
+        .map((item) => {
+          if (typeof item === 'string') return { type: 'image', src: item };
+          if (item && typeof item === 'object' && item.src) {
+            return { type: item.type === 'video' ? 'video' : 'image', src: item.src };
+          }
+          return null;
+        })
+        .filter(Boolean);
+    } catch (error) {
+      console.error('Некорректный формат media у карточки:', error);
+      return [];
+    }
   };
 
   const setCardMediaRatio = (card) => {
-  const mediaBox = card?.querySelector('.work-media');
-  const firstImage = mediaBox?.querySelector('img');
-  if (!mediaBox || !firstImage) return;
+    const mediaBox = card?.querySelector('.work-media');
+    const firstImage = mediaBox?.querySelector('img');
+    if (!mediaBox || !firstImage) return;
 
-  const applyRatio = () => {
-    if (!firstImage.naturalWidth || !firstImage.naturalHeight) return;
-    mediaBox.style.setProperty('--work-ratio', String(firstImage.naturalWidth / firstImage.naturalHeight));
-  };
+    const applyRatio = () => {
+      if (!firstImage.naturalWidth || !firstImage.naturalHeight) return;
+      mediaBox.style.setProperty('--work-ratio', String(firstImage.naturalWidth / firstImage.naturalHeight));
+    };
 
-  if (firstImage.complete) applyRatio();
-  else firstImage.addEventListener('load', applyRatio, { once: true });
+    if (firstImage.complete) applyRatio();
+    else firstImage.addEventListener('load', applyRatio, { once: true });
   };
 
   const initExistingCards = () => {
-  for (const card of document.querySelectorAll('.work-card')) {
-    setCardMediaRatio(card);
-  }
+    for (const card of document.querySelectorAll('.work-card')) {
+      setCardMediaRatio(card);
+    }
   };
 
   initExistingCards();
@@ -654,42 +663,42 @@ document.addEventListener("DOMContentLoaded", () => {
   let touchStartX = 0;
   let touchStartY = 0;
   modalContent?.addEventListener("touchstart", (e) => {
-  if (!workModal?.classList.contains('open')) return;
-  const touch = e.changedTouches?.[0];
-  if (!touch) return;
-  touchStartX = touch.clientX;
-  touchStartY = touch.clientY;
+    if (!workModal?.classList.contains('open')) return;
+    const touch = e.changedTouches?.[0];
+    if (!touch) return;
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
   }, { passive: true });
   modalContent?.addEventListener("touchend", (e) => {
-  if (!workModal?.classList.contains('open')) return;
-  const touch = e.changedTouches?.[0];
-  if (!touch) return;
-  const dx = touch.clientX - touchStartX;
-  const dy = touch.clientY - touchStartY;
-  if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy)) return;
-  if (dx > 0) showPrev();
-  else showNext();
+    if (!workModal?.classList.contains('open')) return;
+    const touch = e.changedTouches?.[0];
+    if (!touch) return;
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx > 0) showPrev();
+    else showNext();
   }, { passive: true });
 
   worksGrid?.addEventListener("click", (e) => {
-  const trigger = e.target.closest('.work-open-btn, .work-media');
-  if (!trigger) return;
-  const card = trigger.closest('.work-card');
-  const media = parseCardMedia(card);
-  if (media.length === 0) return;
-  openModal(media);
+    const trigger = e.target.closest('.work-open-btn, .work-media');
+    if (!trigger) return;
+    const card = trigger.closest('.work-card');
+    const media = parseCardMedia(card);
+    if (media.length === 0) return;
+    openModal(media);
   });
 
   const observer = new MutationObserver((mutations) => {
-  for (const mutation of mutations) {
-    for (const node of mutation.addedNodes) {
-      if (!(node instanceof HTMLElement)) continue;
-      if (node.matches('.work-card')) setCardMediaRatio(node);
-      for (const card of node.querySelectorAll?.('.work-card') || []) {
-        setCardMediaRatio(card);
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        if (!(node instanceof HTMLElement)) continue;
+        if (node.matches('.work-card')) setCardMediaRatio(node);
+        for (const card of node.querySelectorAll?.('.work-card') || []) {
+          setCardMediaRatio(card);
+        }
       }
     }
-  }
   });
   if (worksGrid) observer.observe(worksGrid, { childList: true, subtree: true });
 
