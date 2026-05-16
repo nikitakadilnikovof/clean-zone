@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://site.wwwcleanzone550.com/</loc>
+    <loc>https://wwwcleanzone550.com/</loc>
     <lastmod>2026-05-06</lastmod>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://site.wwwcleanzone550.com/index-ru.html</loc>
+    <loc>https://wwwcleanzone550.com/index-ru.html</loc>
     <lastmod>2026-05-06</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://site.wwwcleanzone550.com/index-es.html</loc>
+    <loc>https://wwwcleanzone550.com/index-es.html</loc>
     <lastmod>2026-05-06</lastmod>
     <priority>0.8</priority>
   </url>
+
 </urlset>
