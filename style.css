@@ -584,6 +584,7 @@ section[id] {
   min-height: 100svh;
   display: flex;
   align-items: center;
+  align-items: safe center;
   justify-content: center;
   padding: 110px 20px;
 }
@@ -593,7 +594,8 @@ section[id] {
   background-size: 400% 400%;
   animation: contactGradientShift 10s ease-in-out infinite;
   position: relative;
-  overflow: hidden;
+  overflow: clip;
+  isolation: isolate;
 }
 
 /* Основная анимация градиента */
@@ -623,12 +625,14 @@ section[id] {
 #contact.cta::before {
   content: "";
   position: absolute;
+  z-index: 0;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
   background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 60%);
   animation: glowMove 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 /* Анимация свечения */
@@ -766,6 +770,9 @@ section[id] {
 }
 
 .cta-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
 
@@ -1296,6 +1303,8 @@ section[id] {
   }
 
   .cta {
+    min-height: auto;
+    align-items: flex-start;
     padding: 96px 20px;
   }
 
